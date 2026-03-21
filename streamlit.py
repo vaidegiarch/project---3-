@@ -5,7 +5,8 @@ import pickle
 
 @st.cache_resource
 def load_model():
-    url = "https://drive.google.com/uc?export=download&id=1TfblkvNkWo08Tfite8BltolStRIXgWVU"
+    url = "https://drive.google.com/uc?export=download&id=1YrtPDdCEmFIVGDiAF1D1UXLUnKXYZs4G"
+    
     
     response = requests.get(url)
 
