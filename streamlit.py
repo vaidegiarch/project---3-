@@ -1,8 +1,8 @@
-with open("model.pkl", "rb") as file:
+with open("best_random_forest.pkl", "rb") as file:
     st.download_button(
         label="Download Model",
         data=file,
-        file_name="model.pkl",
+        file_name="best_random_forest.pkl",
         mime="application/octet-stream"
     )
 
