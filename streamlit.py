@@ -1,36 +1,21 @@
 import streamlit as st
+import requests
+import gzip
 import pickle
-import numpy as np
-import os
 
-# -------------------------------
-# Page Config
-# -------------------------------
-st.set_page_config(page_title="Random Forest App", layout="centered")
-
-# -------------------------------
-# Load Model
-# -------------------------------
 @st.cache_resource
 def load_model():
-    file_path = "best_random_forest.pkl"
+    url = "https://drive.google.com/uc?export=download&id=1TfblkvNkWo08Tfite8BltolStRIXgWVU"
+    
+    response = requests.get(url)
 
-    # Debug: show files
-    st.write("📁 Files in current directory:", os.listdir())
+    with open("model.pkl.gz", "wb") as f:
+        f.write(response.content)
 
-    try:
-        if os.path.exists(file_path):
-            with open(file_path, "rb") as file:
-                model = pickle.load(file)
-            return model
-        else:
-            st.error(f"❌ Model file NOT FOUND: {file_path}")
-            return None
+    with gzip.open("model.pkl.gz", "rb") as f:
+        model = pickle.load(f)
 
-    except Exception as e:
-        st.error(f"❌ Error loading model: {type(e).__name__} - {e}")
-        return None
-
+    return model
 
 model = load_model()
 
