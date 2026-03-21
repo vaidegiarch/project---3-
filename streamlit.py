@@ -1,3 +1,22 @@
+with open("model.pkl", "rb") as file:
+    st.download_button(
+        label="Download Model",
+        data=file,
+        file_name="model.pkl",
+        mime="application/octet-stream"
+    )
+
+
+
+
+
+
+
+
+
+
+
+
 import streamlit as st
 import pickle
 import numpy as np
