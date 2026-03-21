@@ -1,36 +1,27 @@
-
-
-
-
-
-
-
-
-
-
-
-
 import streamlit as st
 import pickle
 import numpy as np
+import os
 
 # -------------------------------
-# Load Model (with error handling)
+# Load Model (with debug)
 # -------------------------------
 @st.cache_resource
 def load_model():
-    try:
-        with open('best_random_forest.pkl', 'rb') as file:
+    file_path = "best_random_forest.pkl"
+    
+    st.write("📁 Files in current directory:", os.listdir())
+
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as file:
             model = pickle.load(file)
         return model
-    except FileNotFoundError:
-        st.error("❌ Model file not found. Please make sure 'best_random_forest.pkl' is in the repo.")
-        return None
-    except Exception as e:
-        st.error(f"❌ Error loading model: {e}")
+    else:
+        st.error(f"❌ Model file NOT FOUND: {file_path}")
         return None
 
 model = load_model()
+
 
 # -------------------------------
 # UI
