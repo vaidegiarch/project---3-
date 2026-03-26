@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 import streamlit as st
 import pickle
 import numpy as np
@@ -15,15 +22,22 @@ cover_type_labels = {
 # -------------------------------
 # Load Model
 # -------------------------------
-@st.cache_resource
-def load_model():
 
-    with open('/content/drive/MyDrive/1random_forest.pkl', 'rb') as file:
-        model = pickle.load(file)
-    return model
 
 model = load_model()
+import gdown
 
+@st.cache_resource
+def load_model():
+    url = "https://drive.google.com/uc?id=YOUR_FILE_ID"
+    output = "model.pkl"
+    
+    gdown.download(url, output, quiet=False)
+
+    with open(output, "rb") as file:
+        model = pickle.load(file)
+
+    return model
 # -------------------------------
 # Title
 # -------------------------------
